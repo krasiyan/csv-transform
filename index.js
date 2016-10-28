@@ -52,7 +52,7 @@ function CSVTransform(dbStream, options) {
   });
 
   self._dbStream.on('data', function(data) {
-
+    data = data.toJSON ? data.toJSON() : data
     if (self._asyncWrite) {
       self._dbStream.pause();
       transformWriteAsync(self, data, function(more) {
@@ -277,4 +277,3 @@ function defaultFormat(formatArgs) {
 
   formatArgs.formattedValue = formattedValue;
 }
-
